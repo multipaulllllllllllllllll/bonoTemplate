@@ -123,8 +123,64 @@ Verify:
 
 
     bun --version
-***
+---
+
+# BUN Template
 
 
+### 📄 `package.json`
+The manifest file for the Node.js/Bun project.
+
+*   **Purpose:** Defines metadata (project name, version) and lists dependencies and scripts.
+*   **Key Sections:**
+    *   **dependencies**: Libraries required at runtime.
+    *   **devDependencies**: Libraries needed only for development.
+    *   **scripts**: Automation commands:
+        *   `dev`: Runs the app (e.g., `bun run src/index.ts`).
+        *   `test`: Runs the test suite (e.g., `bun test`).
+
+---
+
+## 📁 `src/` — Source Directory
+This folder contains all the actual source code for the application.
+
+### 📄 `src/index.ts`
+*   **Purpose:** The main entry point. When you run the application, execution begins here.
+*   **Content:** Initializes the application, sets up routing, and starts the server.
+
+### 🧩 Other Modules Inside `src/`
+*   **`db.ts`**: Handles database connections, pooling, and ORM logic.
+*   **`routes.ts`**: Defines API endpoints (e.g., `/api/users`, `/api/products`).
+*   **`utils/`**: General helper functions used across modules.
+
+---
+
+## 📦 Dependencies & Configuration (Root Level)
+
+### `.env` — Environment Variables
+*   **Purpose:** Stores sensitive configuration such as API keys and database passwords.
+*   **Usage:** Loaded at runtime to configure the application securely. **Never commit this file to version control.**
+
+### `.gitignore`
+*   **Purpose:** Tells Git which files and folders to ignore to keep the repository clean.
+*   **Typical exclusions:**
+    *   `node_modules/`
+    *   `.env`
+    *   Build artifacts (e.g., `/dist`, `/out`)
+    *   System junk (e.g., `.DS_Store`)
+
+---
+
+## ✨ Summary Table
+
+| File / Folder | Function | Why It's Important |
+| :--- | :--- | :--- |
+| **`package.json`** | Project manifest & scripts | Tells Bun how to run and what libraries it needs. |
+| **`src/`** | Application source code | Where all the logic of the application lives. |
+| **`src/index.ts`** | Entry point | Where execution starts when the server boots up. |
+| **`src/routes.ts`** | API definition | Maps URLs (e.g., `/users`) to request handlers. |
+| **`src/db.ts`** | Data layer | Manages all interactions with external data sources. |
+| **`.env`** | Secret configuration | Securely stores passwords and API keys. |
+| **`.gitignore`** | Version control guide | Keeps unnecessary files out of Git. |
 
 
