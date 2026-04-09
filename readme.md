@@ -1,3 +1,4 @@
+
 # 📘 Local AI Coding Environment — Template Setup
 
 This project documents the setup for a **privacy-first local AI coding workflow**. It leverages local Large Language Models (LLMs) for intelligence and Bun for high-performance JavaScript execution.
@@ -18,7 +19,8 @@ Download and install the Ollama runtime:
 👉 https://ollama.com/download
 
 **Verify installation:**
-ollama --version
+
+    ollama --version
 
 ## 🤖 2. Pull Local Models
 Run these commands in your terminal to download the necessary models:
@@ -36,24 +38,24 @@ Run these commands in your terminal to download the necessary models:
 ## ⚙️ 4. Configure Continue.dev
 Create or edit your .continue/config.json to point to your local Ollama instance:
 
-{
-  "models": [
     {
-      "title": "Qwen2.5 Coder",
-      "provider": "ollama",
-      "model": "qwen2.5-coder:7b"
-    },
-    {
-      "title": "Gemma",
-      "provider": "ollama",
-      "model": "gemma:2b"
+      "models": [
+        {
+          "title": "Qwen2.5 Coder",
+          "provider": "ollama",
+          "model": "qwen2.5-coder:7b"
+        },
+        {
+          "title": "Gemma",
+          "provider": "ollama",
+          "model": "gemma:2b"
+        }
+      ],
+      "embeddingsProvider": {
+        "provider": "ollama",
+        "model": "nomic-embed-text"
+      }
     }
-  ],
-  "embeddingsProvider": {
-    "provider": "ollama",
-    "model": "nomic-embed-text"
-  }
-}
 
 ---
 
@@ -65,8 +67,7 @@ Create or edit your .continue/config.json to point to your local Ollama instance
    * Search Windows for "Edit the system environment variables".
    * Click Environment Variables > Select Path in 'User variables' > Edit > New.
    * Add C:\Program Files\bun\
-5. Verify:
-bun --version
+5. Verify: `bun --version`
 
 ---
 
