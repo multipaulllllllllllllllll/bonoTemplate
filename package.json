@@ -1,0 +1,11 @@
+{
+  "name": "my-bun-app",
+  "version": "1.0.0",
+  "description": "Application running with Bun runtime.",
+  "scripts": {
+    "dev": "echo 'Server initialized using Bun runtime...'; echo 'To run the service, use: bun run dev'",
+    "start": "bun run dev"
+  },
+  "dependencies": {}
+}
+

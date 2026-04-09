@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hono + Bun Web App</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; background-color: #f4f4f9; }
+        header { background: #333; color: white; padding: 1rem 0; text-align: center; margin-bottom: 2rem; }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        button { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-right: 10px; background-color: #007bff; color: white; }
+        button:hover { background-color: #0056b3; }
+        #output { margin-top: 20px; padding: 15px; border: 1px solid #ddd; background-color: #e9ecef; white-space: pre-wrap; border-radius: 4px;}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bun + Hono Web App Demo</h1>
+        <p>Frontend Client connecting to the API running on the same origin.</p>
+    </header>
+    <div class="container">
+        <h2>API Interaction</h2>
+
+        <p>Test Health Endpoint:</p>
+        <button id="testHealth">Check API Health</button>
+        <div id="healthOutput"></div>
+
+        <hr style="margin: 20px 0;">
+
+        <p>Greet User:</p>
+        <input type="text" id="userName" placeholder="Enter name (e.g., World)\\" value="User">
+        <button id="greetUser">Send Greeting</button>
+        <div id="greetingOutput"></div>
+
+        <h3 style="margin-top: 30px;">Raw API Output:</h3>
+        <div id="output">Click a button above to test the API.</div>
+    </div>
+
+    <script>
+        const API_URL = window.location.origin; // Assumes the API is served from the same origin
+        const healthBtn = document.getElementById('testHealth');
+        const userNameInput = document.getElementById('userName');
+        const greetBtn = document.getElementById('greetUser');
+        const healthOutputDiv = document.getElementById('healthOutput');
+        const greetingOutputDiv = document.getElementById('greetingOutput');
+        const outputDiv = document.getElementById('output');
+
+        // Function to fetch and display data
+        async function fetchData(endpoint, displayId, displayFunc) {
+            const url = `${API_URL}${endpoint}`;
+            try {
+                const response = await fetch(url);
+                const data = await response.text(); // Read response as text to handle both JSON and plain text easily
+
+                displayFunc(data);
+                outputDiv.textContent = `Success fetching ${endpoint}. Check the ${displayId} area for details.`;
+                return true;
+            } catch (error) {
+                displayFunc(`ERROR: Could not connect to ${endpoint}. Is the backend running?`);
+                outputDiv.textContent = `Failed to connect to ${endpoint}. Check the console for details.`;
+                return false;
+            }
+        }
+
+        // --- Event Listeners ---
+        healthBtn.addEventListener('click', () => {
+            healthOutputDiv.innerHTML = 'Loading...';
+            fetchData('/api/health', 'healthOutput', (data) => {
+                healthOutputDiv.textContent = data;
+            });
+        });
+
+        greetBtn.addEventListener('click', () => {
+            const name = userNameInput.value.trim();
+            if (!name) {
+                alert('Please enter a name.');
+                return;
+            }
+            greetingOutputDiv.innerHTML = 'Loading...';
+            fetchData(`/api/greet/${name}`, 'greetingOutput', (data) => {
+                greetingOutputDiv.textContent = data;
+            });
+        });
+    </script>
+</body>
+</html>

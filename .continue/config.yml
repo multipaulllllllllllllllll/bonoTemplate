@@ -1,0 +1,25 @@
+models:
+  - name: qwen2-coder
+    provider: ollama
+    model: qwen2.5-coder:7b
+    api_base: http://localhost:11434
+  # Keeping Gemma as it is configured
+  - name: gemma4
+    provider: ollama
+    model: gemma4:e4b
+    api_base: http://localhost:11434
+
+# You can keep deepseek if you intend to use it, otherwise remove it
+# - name: deepseek-coder-v2
+#   provider: ollama
+#   model: deepseek-coder-v2:latest
+#   api_base: http://localhost:11434
+
+tabAutocompleteModel:
+  provider: ollama
+  model: qwen2.5-coder:7b # Updated to use the confirmed available model
+  api_base: http://localhost:11434
+
+embeddingsProvider:
+  provider: ollama
+  model: nomic-embed-text:latest # Updated to match the available model name format
